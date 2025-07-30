@@ -5,6 +5,7 @@ import { Card } from "./components/ui/card";
 import { Label } from "@radix-ui/react-label";
 import { Button } from "./components/ui/button";
 import { Input } from "./components/ui/input";
+import { exportImage } from "./lib/exportImage";
 
 const WORD = "world";
 
@@ -83,7 +84,10 @@ function App() {
       </div>
 
       <section className="flex gap-6">
-        <Card className="w-full max-w-max max-h-max bg-card border-border p-6 rounded-xl shadow-lg">
+        <Card
+          className="w-full max-w-max max-h-max bg-card border-border p-6 rounded-xl shadow-lg"
+          id="wordle"
+        >
           <div className="flex flex-col gap-3">
             {guesses.map((guess, i) => {
               const lineSolution = solutions[i]?.[i];
@@ -111,7 +115,7 @@ function App() {
                     return (
                       <div
                         key={j}
-                        className={`w-12 h-12 flex items-center justify-center text-2xl font-bold uppercase 
+                        className={`size-12 flex items-center justify-center text-2xl font-bold uppercase 
                         ${bgColor} ${borderColor} border-2 rounded-md text-card-foreground`}
                       >
                         {guess?.[j] ?? ""}
@@ -196,7 +200,16 @@ function App() {
               </div>
             </div>
           </form>
-
+          <Button
+            onClick={() =>
+              exportImage(guesses, solutions, WORD, win, {
+                title: "My Wordle Result",
+                alt: "Wordle game result",
+              })
+            }
+          >
+            Share
+          </Button>
           {win !== null && (
             <div className="mt-6 p-4 rounded-md text-center">
               <p
