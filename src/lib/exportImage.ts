@@ -31,7 +31,7 @@ export function generateWordleImage(
   ctx.fillText("Word Riddle", canvas.width / 2, padding + 20);
 
   // Subtitle
-  ctx.fillStyle = "#3f3f46";
+  ctx.fillStyle = "#f8fafc";
   ctx.font = "16px Arial";
   ctx.fillText("Guess the 5-letter word", canvas.width / 2, padding + 40);
 
